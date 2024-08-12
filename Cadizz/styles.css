@@ -1,0 +1,335 @@
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, padding 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+
+}
+
+header.scrolled {
+    background-color: #333; /* Cambiar color del background al hacer scroll */
+    padding: 5px 20px; /* Reducir padding */
+    transform: scale(0.9); /* Reducir tamaño */
+}
+
+/* Contenedor principal que agrupa las prendas */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
+    gap: 20px; /* Espacio entre las columnas */
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+
+/* Header */
+header {
+    background-color: #111;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
+    width: 100%;
+}
+
+header img { 
+    max-height: 150px; /*TAMAÑO DEL LOGO*/
+    margin-right: 20px;
+    transition: max-height 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+}
+header.scrolled img {
+    max-height: 100px; /* Reducir el tamaño del logo al hacer scroll */
+    transform: translateY(-10px); /* Mover el logo ligeramente hacia arriba */
+}
+
+
+/*MENU*/
+/* Estilos del menú */
+.menu {
+    background-color: #222;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    position: fixed;
+    top: 60px; /* Ajusta según la altura del header */
+    right: -200px; /* Inicialmente fuera de la pantalla */
+    transition: right 0.3s ease; /* Transición suave al desplegarse */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #ff9800; /* Cambia el color al pasar el ratón */
+}
+
+/* Icono de menú (3 líneas) */
+.menu-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 21px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-icon div {
+    background-color: #fff;
+    height: 3px;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-icon.open div:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-icon.open div:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.open div:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+/* Estilo del contenedor de cada prenda */
+.product {
+    width: 100%; /* Ancho del contenedor igual al de la columna */
+    aspect-ratio: 1/1; /* Mantener un aspecto cuadrado */
+    overflow: hidden; /* Ocultar cualquier parte de la imagen que sobresalga */
+    border: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    margin: 0 auto; /* Centrando cada prenda dentro de su columna */
+    
+}
+
+
+/* Productos */
+/*---------------------------*/
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.product {
+    flex: 0 0 30%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.product-info {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+/*--------------------------------------------*/
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr)); /* 3 columnas */
+    gap: 15px; /* Ajusta el espacio entre los productos */
+    padding: 20px;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+}
+
+.product {
+    position: relative;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden; /* Evita que las imágenes sobresalgan */
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    width: 100%; /* Asegura que el producto ocupe todo el ancho de la columna */
+    aspect-ratio: 1 / 1; /* Mantiene un ratio de aspecto cuadrado para las imágenes */
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Mantiene la proporción de la imagen y llena el contenedor */
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+    max-height: 470px; /* Ajusta la altura máxima para evitar que las imágenes sean demasiado grandes */
+    transition: opacity 0.2s ease; /* Transición suave */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.product img.front {
+    opacity: 1; /* Muestra la parte delantera por defecto */
+}
+
+.product img.back {
+    opacity: 0; /* Oculta la parte trasera por defecto */
+}
+
+.product:hover img.front {
+    opacity: 0; /* Oculta la parte delantera al pasar el mouse */
+}
+
+.product:hover img.back {
+    opacity: 1; /* Muestra la parte trasera al pasar el mouse */
+}
+
+.product h3 , .product p{
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.product-info {
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid #ddd; /* Línea divisoria */
+}
+
+.product-info h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.product a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Footer */
+footer {
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    width: 100%;
+}
+
+
+
+
+
+
+
+/*OPCIONES DE LAS REMERAS*/
+/* Estilo general de las opciones */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.options label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.options select,
+.options input,
+.options button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.options select:focus,
+.options input:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.options button {
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.options button:hover {
+    background-color: #555;
+}
+
+.feedback {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #28a745; /* Color verde para feedback positivo */
+    display: none; /* Oculto por defecto */
+}
+
+.feedback.error {
+    color: #dc3545; /* Color rojo para errores */
+}
+
+
+/*ZOOM*/
+/* Lupa de zoom */
+.zoom-lens {
+    width: 180px;  /* Ajusta el ancho del lente de zoom */
+    height: 180px; /* Ajusta la altura del lente de zoom */
+    border-radius: 50%; /* Mantén el borde redondeado */
+}
+/*-----------------------------------*/
+/* Estilo para los filtros */
+#filters {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.filter-button:hover {
+    background-color: #555;
+}
+/* Oculta todos los productos inicialmente */
+
+
+/* Muestra los productos filtrados */
+.product.show {
+    display: block;
+}
